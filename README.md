@@ -1,24 +1,39 @@
-# Direct Line
+# Direct Line - Landing Page
 
-Website for Direct Line — a peer-to-peer messenger and calling app for Android.
-Online it connects phone to phone. Offline it runs on a Bluetooth mesh.
+This repository contains the static landing page for **Direct Line**, a peer-to-peer messenger and calling app that works both online and offline via a Bluetooth mesh network.
 
-Live site: https://abhirajroshan79.github.io/Directline
+## 🚀 Getting Started
 
-## Files
+This is a static website, meaning it requires no backend or build tools to run. 
 
-| File | What it is |
-|---|---|
-| `index.html` | The whole page |
-| `style.css` | All styling |
+### Prerequisites
+A modern web browser (Chrome, Firefox, Safari, Edge).
 
-## Updating the download link
+### Running locally
+1. Clone or download this repository.
+2. Open `index.html` directly in your web browser.
+3. No local server is strictly necessary, though you can use tools like VS Code's Live Server for a better development experience.
 
-The Install buttons point at `direct-line.apk`. Publish the APK under
-**Releases**, copy the download URL, and paste it into both `href` spots
-in `index.html`.
+## 📁 File Structure
+- `index.html` - The main structure, content, and interactive JavaScript of the page.
+- `style.css` - All design tokens, layout rules, animations, and typography styles.
+- `README.md` - Documentation for the repository.
 
-## Developer
+## 🌐 Deployment (GitHub Pages)
+Since this site is fully static, it is perfectly suited for **GitHub Pages**.
+1. Create a repository on GitHub (e.g., `username.github.io` or a project repo).
+2. Upload these files (`index.html` and `style.css`) to the root of the repository.
+3. Go to **Settings > Pages** in your GitHub repo and enable deploying from the `main` branch.
+4. Your site will be live within minutes!
 
-Abhishek Kumar Paswan — B.Tech, Computer Science and Engineering,
-Government Engineering College, Ambikapur.
+## ✨ Features Showcased
+- **Responsive Design**: Adapts seamlessly to mobile, tablet, and desktop screens.
+- **Scroll Reveals**: Smooth entry animations tied to scroll position (via IntersectionObserver).
+- **Dynamic Text Cycling**: Animated headline feature swapping.
+- **Canvas Mesh Animation**: A custom interactive HTML5 `<canvas>` diagram demonstrating the routing mesh offline vs online modes.
+- **Simulated File Download**: A dynamic UI showing simulated progress and file blob generation for APK downloading.
+
+## 🛠 Built With
+- Semantic HTML5
+- Vanilla CSS3 (Custom Properties, Flexbox, CSS Grid, animations)
+- Vanilla JavaScript (ES6)
