@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Direct Line — messaging without the internet</title>
+  <meta name="description" content="Direct Line is a peer-to-peer messenger and calling app. Online it connects phone to phone. Offline it runs on a Bluetooth mesh. Free for Android.">
+  <meta name="theme-color" content="#EDF2FF">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&family=Inter+Tight:wght@300..600&family=Azeret+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Hidden SVG Symbols for Reuse -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="icon-mesh-app" viewBox="0 0 200 120">
+        <g fill="none" stroke="currentColor" stroke-width="19" stroke-linecap="round">
+          <rect x="9.5" y="18.5" width="103" height="83" rx="41.5"/>
+          <rect x="87.5" y="18.5" width="103" height="83" rx="41.5"/>
+          <g clip-path="url(#lowerLap)">
+            <rect x="9.5" y="18.5" width="103" height="83" rx="41.5"/>
+          </g>
+        </g>
+        <clipPath id="lowerLap"><rect x="78" y="62" width="46" height="52"/></clipPath>
+      </symbol>
+    </defs>
+  </svg>
+
+  <header class="site-header">
+    <div class="container header-nav">
+      <a class="brand-logo" href="#top">
+        <svg viewBox="0 0 200 120"><use href="#icon-mesh-app"/></svg> 
+        Direct Line
+      </a>
+      <a class="btn-primary" href="#download">Get app</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="container">
+
+      <!-- Hero Section -->
+      <div class="id-top reveal-on-scroll">
+        <svg class="mesh-mark" viewBox="0 0 88 34" fill="none" aria-hidden="true">
+          <line class="wire" x1="8" y1="17" x2="44" y2="17"></line>
+          <line class="wire" x1="44" y1="17" x2="80" y2="17"></line>
+          <circle class="node lit" cx="8" cy="17" r="5.5"></circle>
+          <circle class="node" cx="44" cy="17" r="5.5"></circle>
+          <circle class="node" cx="80" cy="17" r="5.5"></circle>
+          <circle class="spark" cx="8" cy="17" r="3.5">
+            <animate attributeName="cx" values="8;44;80;80" dur="2.8s" keyTimes="0;0.4;0.8;1" repeatCount="indefinite"></animate>
+            <animate attributeName="opacity" values="0;1;1;0" dur="2.8s" keyTimes="0;0.1;0.8;1" repeatCount="indefinite"></animate>
+          </circle>
+        </svg>
+
+        <div class="brand"><h1>Direct Line</h1></div>
+      </div>
+
+      <section class="hero-listing reveal-on-scroll">
+        <div class="app-icon-large" aria-hidden="true">
+          <svg viewBox="0 0 200 120"><use href="#icon-mesh-app"/></svg>
+        </div>
+        <div>
+          <h1 class="hero-title">Direct Line</h1>
+          <div class="by"></div>
+        </div>
+      </section>
+
+      <p class="headline-dynamic reveal-on-scroll">
+        Message 
+        <!-- Removed font-mono here to match the large size and styling of "Message" -->
+        <span class="word-swap-container" id="wordSwapArea" role="button" tabindex="0" aria-live="polite" aria-label="Tap to cycle features">
+          <span class="ghost-word" id="swapGhostWord" aria-hidden="true">Anonymous</span>
+          <span class="active-word" id="swapCurrentWord">Anonymous</span>
+          <span class="progress-meter" id="swapProgressMeter"></span>
+        </span>
+      </p>
+
+      <p class="hero-tagline reveal-on-scroll">
+        Messaging and calling that works phone to phone. Online it skips the server. Offline it runs on a Bluetooth mesh.
+      </p>
+
+      <div class="app-specs reveal-on-scroll">
+        <div class="spec-item"><b>Free</b><span>No ads, no plans</span></div>
+        <div class="spec-item"><b>No account</b><span>No number or email</span></div>
+        <div class="spec-item"><b>7.7 MB</b><span>APK download</span></div>
+        <div class="spec-item"><b>Android 7+</b><span>Phone or tablet</span></div>
+      </div>
+
+      <!-- Live Preview Carousel -->
+      <section class="section-block reveal-on-scroll">
+        <h2>Preview</h2>
+        <div class="preview-rail">
+          
+          <div class="preview-card">
+            <canvas id="meshCanvas"></canvas>
+            <button class="mesh-toggle-btn font-mono" id="meshToggleBtn" aria-pressed="false">
+              <span class="toggle-track"><i class="toggle-indicator"></i></span> 
+              <span>Cut internet</span>
+            </button>
+            <div class="card-caption font-mono">Mesh routing</div>
+          </div>
+          
+          <div class="preview-card">
+            <div class="mock-header">
+              <span class="mock-avatar"></span> Purshottam 
+              <span class="font-mono" style="margin-left:auto; color:var(--color-brand-primary); font-size:9px;">2 hops</span>
+            </div>
+            <div class="mock-chat-container">
+              <div class="mock-bubble">Signal gone here. You getting this?<span class="timestamp">12:04</span></div>
+              <div class="mock-bubble is-me">Loud and clear. No data on.<span class="timestamp">12:04</span></div>
+              <div class="mock-bubble">Wait, how<span class="timestamp">12:05</span></div>
+              <div class="mock-bubble is-me">Your phone is talking to mine through Ankit's.<span class="timestamp">12:05</span></div>
+            </div>
+            <div class="card-caption font-mono">Chat over mesh</div>
+          </div>
+          
+          <div class="preview-card">
+            <div class="mock-header">
+              Nearby <span class="font-mono" style="margin-left:auto; color:var(--color-text-muted); font-size:9px;">Scanning</span>
+            </div>
+            <div class="mock-list-container">
+              <div class="mock-list-item"><span class="status-led"></span> Abhi <small class="font-mono">Direct</small></div>
+              <div class="mock-list-item"><span class="status-led"></span> Sujit <small class="font-mono">Direct</small></div>
+              <div class="mock-list-item"><span class="status-led is-mesh"></span> Ritik <small class="font-mono">2 hops</small></div>
+              <div class="mock-list-item"><span class="status-led is-mesh"></span> Abhishek <small class="font-mono">3 hops</small></div>
+              <div class="mock-list-item"><span class="status-led is-mesh"></span> MrPaswan <small class="font-mono">3 hops</small></div>
+            </div>
+            <div class="card-caption font-mono">People in range</div>
+          </div>
+          
+        </div>
+      </section>
+
+      <!-- Features Section -->
+      <section class="section-block reveal-on-scroll">
+        <h2>About this app</h2>
+        <p class="text-sub">
+          Direct Line connects two phones to each other instead of routing through a company's servers. With internet, it opens a direct link for text, voice and video. Without internet, it hops from phone to phone over Bluetooth until the message arrives.
+        </p>
+        <div class="features-grid">
+          <div class="feature-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>
+            <div>
+              <b>End-to-end encrypted</b>
+              <span class="feature-desc">Relays carry it, they can't read it.</span>
+            </div>
+          </div>
+          <div class="feature-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12a8 8 0 0116 0"/><circle cx="12" cy="12" r="2"/><path d="M4 12v6M20 12v6"/></svg>
+            <div>
+              <b>Voice and video calls</b>
+              <span class="feature-desc">Direct connection when you're online.</span>
+            </div>
+          </div>
+          <div class="feature-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6" cy="12" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="18" cy="18" r="2"/><path d="M8 11l8-4M8 13l8 4"/></svg>
+            <div>
+              <b>Bluetooth mesh</b>
+              <span class="feature-desc">Every phone extends the range.</span>
+            </div>
+          </div>
+          <div class="feature-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v18M5 8l7-5 7 5"/><rect x="8" y="13" width="8" height="8" rx="1"/></svg>
+            <div>
+              <b>Messages wait</b>
+              <span class="feature-desc">Queued until a path opens up.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- How it works -->
+      <section class="section-block reveal-on-scroll">
+        <h2>How it works</h2>
+        <div class="steps-list">
+          <div class="step-item">
+            <span class="step-number font-mono">01</span>
+            <div><b>Find</b><p>Open Nearby. Phones running Direct Line show up. Scan a QR code once to save someone.</p></div>
+          </div>
+          <div class="step-item">
+            <span class="step-number font-mono">02</span>
+            <div><b>Lock</b><p>Both phones swap keys and seal the line before anything is sent.</p></div>
+          </div>
+          <div class="step-item">
+            <span class="step-number font-mono">03</span>
+            <div><b>Carry</b><p>Too far to reach directly? The message hops through phones in between until it lands.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Download Section -->
+      <section class="section-block reveal-on-scroll" id="download">
+        <div class="download-panel">
+          <div class="appicon-small" aria-hidden="true">
+            <svg viewBox="0 0 200 120"><use href="#icon-mesh-app"/></svg>
+          </div>
+          <h2>Get Direct Line</h2>
+          <p class="text-sub">One file, no store account, nothing to pay. About a minute from tap to first message.</p>
+          
+          <div class="download-actions">
+            <!-- REPLACED ICON HERE -->
+            <a class="btn-primary" id="startDownloadBtn" href="https://github.com/Abhirajroshan79/Directline/releases/latest/download/direct-line.apk" download>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Install for Android
+            </a>
+          </div>
+                  <!-- Download Progress Component -->
+          <div class="downloader-wrapper" id="downloadProgressArea">
+            <div class="progress-box" id="progressBox" style="text-align: left;">
+              <div class="progress-ui">
+                <div class="progress-header">
+                  <span class="progress-label">Downloading<span class="loading-dots"><i>.</i><i>.</i><i>.</i></span></span>
+                  <span class="progress-percent font-mono" id="downloadPercentage">0%</span>
+                </div>
+                <div class="progress-track"><span class="progress-fill" id="downloadFillBar"></span></div>
+              </div>
+              <a class="btn-primary btn-save-file" id="saveFileBtn" hidden download="direct-line.apk">Save APK</a>
+            </div>
+          </div>
+          
+          <div class="app-meta-grid">
+            <div class="meta-item"><span>Version</span><b>1.0</b></div>
+            <div class="meta-item"><span>Size</span><b>7.7 MB</b></div>
+            <div class="meta-item"><span>Requires</span><b>Android 7.0+</b></div>
+            <div class="meta-item"><span>Price</span><b>Free</b></div>
+          </div>
+        </div>
+        
+        <div class="steps-list" style="margin-top:18px">
+          <div class="step-item">
+            <span class="step-number font-mono">01</span>
+            <div><b>Download the APK</b><p>Chrome warns about files from the web. Choose "Download anyway".</p></div>
+          </div>
+          <div class="step-item">
+            <span class="step-number font-mono">02</span>
+            <div><b>Allow this source</b><p>Open the file, turn on install permission, then tap Install.</p></div>
+          </div>
+          <div class="step-item">
+            <span class="step-number font-mono">03</span>
+            <div><b>Start</b><p>Allow Bluetooth and nearby devices, pick a name, scan a friend's code.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Use Cases -->
+      <section class="section-block reveal-on-scroll">
+        <h2>Good for</h2>
+        <div class="steps-list">
+          <div class="step-item"><span class="step-number font-mono">—</span><div><b>Trekking and hills</b><p>Keep the group talking where the network gave up.</p></div></div>
+          <div class="step-item"><span class="step-number font-mono">—</span><div><b>Crowds and festivals</b><p>Thirty thousand phones jamming one tower doesn't affect mesh.</p></div></div>
+          <div class="step-item"><span class="step-number font-mono">—</span><div><b>Power cuts and storms</b><p>Towers go down. Phones near each other still reach each other.</p></div></div>
+          <div class="step-item"><span class="step-number font-mono">—</span><div><b>Campus and hostel</b><p>Basements, labs, dead spots. Chat across the building without data.</p></div></div>
+        </div>
+      </section>
+
+      <!-- Support & Tip Jar -->
+      <section class="section-block reveal-on-scroll">
+        <div class="support-card">
+          <div class="qr-container">
+            <img class="qr-image" alt="UPI QR code to pay Abhishek Kumar Paswan" src="https://api.qrserver.com/v1/create-qr-code/?size=176x176&data=upi%3A%2F%2Fpay%3Fpa%3Dabhirajroshan79%40ptyes%26pn%3DAbhishek%20Kumar%20Paswan%26cu%3DINR">
+            <span class="qr-vpa font-mono">abhirajroshan79@ptyes</span>
+          </div>
+          <div>
+            <h2 class="support-title"><span>Donate to Support Us</span></h2>
+            <p>
+              The app is free and always will be. No ads, no tracking, nobody funding it — just one student and a lot of late nights. If Direct Line got a message through for you, a small tip keeps the next version coming.
+            </p>
+            <div class="tip-amounts" role="group" aria-label="Donation Amounts">
+              <button class="btn-tip" data-amount="49">₹49</button>
+              <button class="btn-tip" data-amount="99" aria-pressed="true">₹99</button>
+              <button class="btn-tip" data-amount="249">₹249</button>
+              <button class="btn-tip" data-amount="">Any amount</button>
+            </div>
+            <div class="payment-actions">
+              <a class="btn-primary" id="upiPayBtn" href="#">Pay ₹99 with UPI</a>
+              <span class="payment-note font-mono">Opens PhonePe, GPay or any UPI app</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Developer Info -->
+      <section class="section-block dev reveal-on-scroll" id="dev">
+        <h2>Developer</h2>
+        <div class="dev-name">Abhishek Kumar Paswan</div>
+        <div class="dev-role">B.Tech, Computer Science and Engineering</div>
+        <div class="dev-college">Government Engineering College, Ambikapur</div>
+        
+        <div class="font-mono dev-contact-label">Contact me</div>
+        
+        <div class="social-links">
+          <a class="social-card" href="mailto:abhirajroshan7970@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            Email<span class="social-handle font-mono">abhirajroshan79</span>
+          </a>
+          <a class="social-card" href="https://instagram.com/abhirajroshan7o" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"/></svg>
+            Instagram<span class="social-handle font-mono">@abhirajroshan79</span>
+          </a>
+          <a class="social-card" href="https://t.me/abhirajroshan79" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 4L3 11l5 2 2 6 3-4 5 4z"/><path d="M8 13l10-7-6 9"/></svg>
+            Telegram<span class="social-handle font-mono">@abhirajroshan79</span>
+          </a>
+          <a class="social-card" href="https://facebook.com/abhiraj.roshan.50" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 3h-2.5A3.5 3.5 0 009 6.5V9H7v3h2v9h3v-9h2.5l.5-3H12V6.8c0-.6.4-.8.9-.8H15z"/></svg>
+            Facebook<span class="social-handle font-mono">@abhirajroshan79</span>
+          </a>
+          <a class="social-card" href="https://x.com/abhirajroshan79" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="14.49 10.63 21 2 19.46 2 13.82 9.51 9.32 2 4 2 10.83 11.96 4 21 5.54 21 11.49 13.06 16.23 21 21.55 21 14.49 10.63"/><polygon points="12.28 12.01 11.58 11.02 6.09 3.17 8.44 3.17 12.87 9.42 13.57 10.42 19.33 18.53 16.98 18.53 12.28 12.01"/></svg>
+            X (Twitter)<span class="social-handle font-mono">@abhirajroshan79</span>
+          </a>
+          <a class="social-card" href="https://github.com/abhirajroshan79" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            GitHub<span class="social-handle font-mono">abhirajroshan79</span>
+          </a>
+          <a class="social-card" href="https://youtube.com/@abhirajroshan79" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+            YouTube<span class="social-handle font-mono">@abhirajroshan79</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="site-footer reveal-on-scroll">
+        <span>Direct Line · Made in India</span>
+        <span class="font-mono">© <span id="currentYear"></span></span>
+      </footer>
+
+    </div>
+  </main>
+
+  <!-- ============================================================
+       APPLICATION SCRIPTS
+       ============================================================ -->
+  <script>
+    /**
+     * Helper: Sets current year in the footer
+     */
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    /**
+     * Helper: Scroll Reveal Animation via IntersectionObserver
+     */
+    (function initScrollReveal() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          }
+        });
+      }, { threshold: 0.05, rootMargin: "0px 0px -40px 0px" });
+      
+      document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+    })();
+
+    /**
+     * Feature: Headline Word Cycler Animation
+     */
+    (function initWordCycler() {
+      const FEATURE_WORDS = ['Anonymous', 'Safe', 'Secure', 'Unlimited'];
+      const container = document.getElementById('wordSwapArea');
+      const ghostEl = document.getElementById('swapGhostWord');
+      
+      if (!container || !ghostEl) return;
+      
+      // The ghost element maintains width so layout doesn't jump
+      ghostEl.textContent = FEATURE_WORDS.reduce((longest, current) => 
+        current.length > longest.length ? current : longest, ''
+      );
+      
+      let currentIndex = 0;
+      let cycleTimer = null;
+      
+      function showWord(index) {
+        const oldWordEl = document.getElementById('swapCurrentWord');
+        const progressMeterEl = document.getElementById('swapProgressMeter');
+        if (!oldWordEl) return;
+        
+        currentIndex = (index + FEATURE_WORDS.length) % FEATURE_WORDS.length;
+        
+        const newWordEl = document.createElement('span');
+        newWordEl.className = 'active-word'; 
+        newWordEl.id = 'swapCurrentWord'; 
+        newWordEl.textContent = FEATURE_WORDS[currentIndex];
+        
+        oldWordEl.classList.add('is-exiting'); 
+        oldWordEl.removeAttribute('id');
+        
+        // Remove the old element after CSS animation completes
+        setTimeout(() => oldWordEl.remove(), 240);
+        
+        container.insertBefore(newWordEl, progressMeterEl);
+        
+        // Restart the progress bar animation
+        if (progressMeterEl) {
+          progressMeterEl.classList.remove('is-running');
+          void progressMeterEl.offsetWidth; // Trigger DOM reflow
+          progressMeterEl.classList.add('is-running');
+        }
+      }
+      
+      function startCycle() {
+        clearInterval(cycleTimer);
+        const progressMeterEl = document.getElementById('swapProgressMeter');
+        if (progressMeterEl) {
+          progressMeterEl.classList.remove('is-running');
+          void progressMeterEl.offsetWidth;
+          progressMeterEl.classList.add('is-running');
+        }
+        cycleTimer = setInterval(() => showWord(currentIndex + 1), 3000);
+      }
+      
+      // Interaction Handlers
+      container.addEventListener('click', () => { 
+        showWord(currentIndex + 1); 
+        startCycle(); 
+      });
+      
+      container.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          showWord(currentIndex + 1);
+          startCycle();
+        }
+      });
+      
+      startCycle();
+    })();
+
+    /**
+     * Feature: UPI Tipping Logic
+     */
+    (function initUpiTipping() {
+      const UPI_ID = 'abhirajroshan79@ptyes';
+      const PAYEE_NAME = 'Abhishek Kumar Paswan';
+      
+      const payButton = document.getElementById('upiPayBtn');
+      const tipButtons = [...document.querySelectorAll('.btn-tip')];
+      const paymentNote = document.querySelector('.payment-note');
+      
+      if (!payButton) return;
+
+      function updateUpiLink(amount) {
+        let uri = `upi://pay?pa=${UPI_ID}&pn=${encodeURIComponent(PAYEE_NAME)}&cu=INR`;
+        if (amount) uri += `&am=${amount}`;
+        
+        payButton.href = uri; 
+        payButton.textContent = amount ? `Pay ₹${amount} with UPI` : 'Open UPI app';
+      }
+      
+      payButton.addEventListener('click', e => {
+        const isMobileDevice = /Android|iPhone|iPad/i.test(navigator.userAgent);
+        if (!isMobileDevice) {
+          e.preventDefault();
+          paymentNote.textContent = 'UPI apps only open on a phone — scan the code instead.';
+        }
+      });
+      
+      tipButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          tipButtons.forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
+          updateUpiLink(btn.dataset.amount);
+        });
+      });
+      
+      updateUpiLink('99'); // Set initial state
+    })();
+
+    /**
+     * Feature: In-Page APK Downloader (Simulated Fetch)
+     */
+    (function initApkDownloader() {
+      const BASE_URL = 'https://github.com/Abhirajroshan79/Directline/releases/latest/download/';
+      const ASSET_NAMES = ['direct-line.apk', 'app-debug.apk'];
+      const PRIMARY_URL = BASE_URL + ASSET_NAMES[0];
+      const FALLBACK_FILE_SIZE = 8027222; // ~7.7 MB
+      
+      const startBtn = document.getElementById('startDownloadBtn');
+      const progressBox = document.getElementById('progressBox');
+      const progressArea = document.getElementById('downloadProgressArea');
+      const percentText = document.getElementById('downloadPercentage');
+      const fillBar = document.getElementById('downloadFillBar');
+      const saveBtn = document.getElementById('saveFileBtn');
+      
+      if (!startBtn || !progressBox) return;
+      
+      let isDownloading = false;
+      let cachedBlobUrl = null;
+
+      function updateProgressUI(downloadedBytes, totalBytes) {
+        const percentage = Math.min(100, Math.round((downloadedBytes / totalBytes) * 100));
+        percentText.textContent = `${percentage}%`;
+        fillBar.style.width = `${percentage}%`;
+      }
+
+      async function triggerDownload() {
+        if (isDownloading) return;
+        isDownloading = true;
+        
+        progressBox.classList.remove('is-finished');
+        progressBox.classList.add('is-downloading');
+        saveBtn.hidden = true;
+        updateProgressUI(0, FALLBACK_FILE_SIZE);
+        
+        try {
+          let response = null;
+          for (const asset of ASSET_NAMES) {
+            try {
+              const fetchResult = await fetch(`${BASE_URL}${asset}?t=${Date.now()}`, { cache: 'no-store' });
+              if (fetchResult.ok) { 
+                response = fetchResult; 
+                break; 
+              }
+            } catch (networkError) {
+              console.warn(`Failed to fetch ${asset}, trying next...`);
+            }
+          }
+          
+          if (!response) throw new Error('No asset found on GitHub releases');
+          
+          const totalBytes = Number(response.headers.get('content-length')) || FALLBACK_FILE_SIZE;
+          const reader = response.body.getReader();
+          const chunks = []; 
+          let downloadedBytes = 0;
+          
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            chunks.push(value); 
+            downloadedBytes += value.length;
+            updateProgressUI(downloadedBytes, totalBytes);
+          }
+          
+          const fileBlob = new Blob(chunks, { type: 'application/vnd.android.package-archive' });
+          if (cachedBlobUrl) URL.revokeObjectURL(cachedBlobUrl);
+          cachedBlobUrl = URL.createObjectURL(fileBlob);
+          
+          updateProgressUI(1, 1); // 100%
+          saveBtn.href = cachedBlobUrl; 
+          saveBtn.hidden = false;
+          
+          progressBox.classList.remove('is-downloading');
+          progressBox.classList.add('is-finished');
+          
+        } catch (err) {
+          console.error("Download simulation failed:", err);
+          progressBox.classList.remove('is-downloading');
+          // Fallback to standard browser download
+          window.location.href = PRIMARY_URL;
+        } finally { 
+          isDownloading = false; 
+        }
+      }
+
+      startBtn.addEventListener('click', e => {
+        e.preventDefault();
+        progressArea.hidden = false;
+        
+        // Timeout allows CSS display to apply before triggering transition/scroll
+        setTimeout(() => {
+          progressArea.classList.add('is-visible');
+          progressArea.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          setTimeout(triggerDownload, 320);
+        }, 50);
+      });
+    })();
+
+    /**
+     * Feature: Mesh Routing Canvas Preview
+     */
+    (function initMeshCanvas() {
+      const canvas = document.getElementById('meshCanvas');
+      if (!canvas) return;
+      
+      const ctx = canvas.getContext('2d');
+      const toggleBtn = document.getElementById('meshToggleBtn');
+      const prefersReducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      
+      let canvasWidth = 0;
+      let canvasHeight = 0;
+      let pixelRatio = 1;
+      
+      // Node Configurations
+      const nodesData = [
+        { id: 'me', x: 0.22, y: 0.74, isUser: true },
+        { id: 'r1', x: 0.36, y: 0.50 },
+        { id: 'r2', x: 0.62, y: 0.66 },
+        { id: 'r3', x: 0.44, y: 0.86 },
+        { id: 'r4', x: 0.74, y: 0.42 },
+        { id: 'you', x: 0.80, y: 0.80, isUser: true },
+        { id: 'tower', x: 0.50, y: 0.20, isTower: true }
+      ];
+      
+      const nodeMap = Object.fromEntries(nodesData.map(n => [n.id, n]));
+      
+      // Routing Paths
+      const onlineRoute = ['me', 'tower', 'you'];
+      const offlineRoute = ['me', 'r1', 'r2', 'you'];
+      const idleLinks = [
+        ['me', 'r1'], ['r1', 'r2'], ['r2', 'you'], 
+        ['me', 'r3'], ['r3', 'r2'], ['r1', 'r4'], 
+        ['r4', 'you'], ['r2', 'r4']
+      ];
+      
+      // Animation State
+      let isOffline = false;
+      let tickTime = 0;
+      let packetProgress = 0;
+      let currentSegment = 0;
+      let packetTrail = [];
+      
+      function getColors() {
+        const styles = getComputedStyle(document.body);
+        return {
+          textMain: styles.getPropertyValue('--color-text-main').trim(),
+          lightIce: styles.getPropertyValue('--color-brand-light').trim(),
+          beacon: styles.getPropertyValue('--color-brand-primary').trim()
+        };
+      }
+
+      function handleResize() {
+        const rect = canvas.getBoundingClientRect();
+        pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+        canvasWidth = rect.width; 
+        canvasHeight = rect.height;
+        
+        canvas.width = canvasWidth * pixelRatio; 
+        canvas.height = canvasHeight * pixelRatio;
+        ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+      }
+      
+      new ResizeObserver(handleResize).observe(canvas); 
+      handleResize();
+      
+      const getCoords = (nodeId) => ({ 
+        x: nodeMap[nodeId].x * canvasWidth, 
+        y: nodeMap[nodeId].y * canvasHeight 
+      });
+      
+      function drawLine(startId, endId, alpha, strokeWidth, dashPattern) {
+        const startPos = getCoords(startId);
+        const endPos = getCoords(endId);
+        
+        ctx.save();
+        ctx.globalAlpha = alpha;
+        ctx.strokeStyle = getColors().lightIce;
+        ctx.lineWidth = strokeWidth;
+        
+        if (dashPattern) ctx.setLineDash(dashPattern);
+        
+        ctx.beginPath();
+        ctx.moveTo(startPos.x, startPos.y);
+        ctx.lineTo(endPos.x, endPos.y);
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      function drawNode(nodeId) {
+        const pos = getCoords(nodeId);
+        const node = nodeMap[nodeId];
+        const colors = getColors();
+        
+        if (node.isTower) {
+          ctx.save();
+          ctx.globalAlpha = isOffline ? 0.25 : 0.9;
+          ctx.strokeStyle = colors.textMain;
+          ctx.lineWidth = 1.5;
+          
+          // Draw Antenna Shape
+          ctx.beginPath();
+          ctx.moveTo(pos.x - 6, pos.y + 9);
+          ctx.lineTo(pos.x, pos.y - 8);
+          ctx.lineTo(pos.x + 6, pos.y + 9);
+          ctx.stroke();
+          
+          ctx.beginPath();
+          ctx.arc(pos.x, pos.y - 8, 2.5, 0, Math.PI * 2);
+          ctx.stroke();
+          
+          // Cross-out if offline
+          if (isOffline) {
+            ctx.globalAlpha = 1;
+            ctx.strokeStyle = colors.beacon;
+            ctx.lineWidth = 1.6;
+            ctx.beginPath();
+            ctx.moveTo(pos.x - 9, pos.y - 11);
+            ctx.lineTo(pos.x + 9, pos.y + 11);
+            ctx.stroke();
+          }
+          ctx.restore();
+          return;
+        }
+        
+        const radius = (node.isUser) ? 7 : 4.5;
+        
+        ctx.save();
+        ctx.globalAlpha = isOffline ? 1 : ((node.isUser) ? 1 : 0.5);
+        
+        // Pulse effect for Users
+        if (node.isUser) {
+          const pulseScale = 1 + Math.sin(tickTime / 28 + (nodeId === 'me' ? 0 : 2)) * 0.12;
+          ctx.globalAlpha = 0.22;
+          ctx.fillStyle = colors.beacon;
+          ctx.beginPath();
+          ctx.arc(pos.x, pos.y, radius * 2.6 * pulseScale, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.globalAlpha = 1;
+        }
+        
+        // Core Dot
+        ctx.fillStyle = (node.isUser) ? colors.textMain : colors.lightIce;
+        ctx.beginPath();
+        ctx.arc(pos.x, pos.y, radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+        
+        // User Labels
+        if (node.isUser) {
+          ctx.save();
+          ctx.globalAlpha = 0.65;
+          ctx.fillStyle = colors.textMain;
+          ctx.font = '600 9px "Azeret Mono", monospace';
+          ctx.textAlign = 'center';
+          ctx.fillText(nodeId === 'me' ? 'YOU' : 'FRIEND', pos.x, pos.y + radius + 14);
+          ctx.restore();
+        }
+      }
+
+      function renderFrame() {
+        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+        const colors = getColors();
+        const activeRoute = isOffline ? offlineRoute : onlineRoute;
+        
+        // Draw background/idle links
+        if (isOffline) {
+          idleLinks.forEach(link => drawLine(link[0], link[1], 0.5, 1));
+        } else {
+          drawLine('me', 'tower', 0.45, 1, [4, 5]);
+          drawLine('tower', 'you', 0.45, 1, [4, 5]);
+          idleLinks.forEach(link => drawLine(link[0], link[1], 0.18, 1));
+        }
+        
+        // Draw active path
+        for (let i = 0; i < activeRoute.length - 1; i++) {
+          const isPassedSegment = i < currentSegment;
+          drawLine(
+            activeRoute[i], 
+            activeRoute[i+1], 
+            isPassedSegment ? 1 : 0.5, 
+            isPassedSegment ? 1.8 : 1.2
+          );
+        }
+        
+        // Calculate moving packet position
+        const startPos = getCoords(activeRoute[currentSegment]);
+        const endPos = getCoords(activeRoute[currentSegment + 1] || activeRoute[currentSegment]);
+        
+        const packetX = startPos.x + (endPos.x - startPos.x) * packetProgress;
+        const packetY = startPos.y + (endPos.y - startPos.y) * packetProgress;
+        
+        // Update Trail
+        packetTrail.push({ x: packetX, y: packetY });
+        if (packetTrail.length > 22) packetTrail.shift();
+        
+        // Draw Trail
+        ctx.save();
+        ctx.fillStyle = colors.beacon;
+        packetTrail.forEach((point, index) => {
+          ctx.globalAlpha = (index / packetTrail.length) * 0.45;
+          ctx.beginPath();
+          ctx.arc(point.x, point.y, 1.9, 0, Math.PI * 2);
+          ctx.fill();
+        });
+        
+        // Draw Main Packet
+        ctx.globalAlpha = 1;
+        ctx.shadowColor = colors.beacon;
+        ctx.shadowBlur = 10;
+        ctx.beginPath();
+        ctx.arc(packetX, packetY, 3.6, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+        
+        // Draw Nodes
+        nodesData.forEach(node => drawNode(node.id));
+      }
+
+      function animationLoop() {
+        tickTime++;
+        const activeRoute = isOffline ? offlineRoute : onlineRoute;
+        
+        // Increment packet progress (mesh is slightly faster to show hopping)
+        packetProgress += isOffline ? 0.016 : 0.012;
+        
+        if (packetProgress >= 1) { 
+          packetProgress = 0; 
+          currentSegment++; 
+          
+          if (currentSegment >= activeRoute.length - 1) { 
+            currentSegment = 0; 
+            packetTrail = []; 
+          } 
+        }
+        
+        renderFrame();
+        requestAnimationFrame(animationLoop);
+      }
+      
+      // Start Loop or just draw once for accessibility
+      if (prefersReducedMotion) {
+        renderFrame(); 
+      } else {
+        animationLoop();
+      }
+      
+      // Toggle Interaction
+      toggleBtn.addEventListener('click', () => {
+        isOffline = !isOffline;
+        
+        toggleBtn.setAttribute('aria-pressed', isOffline);
+        toggleBtn.querySelector('span:last-child').textContent = isOffline ? 'Restore' : 'Cut internet';
+        
+        // Reset packet tracking
+        currentSegment = 0; 
+        packetProgress = 0; 
+        packetTrail = [];
+        
+        if (prefersReducedMotion) renderFrame();
+      });
+    })();
+  </script>
+</body>
+</html>
