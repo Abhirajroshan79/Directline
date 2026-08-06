@@ -17,7 +17,7 @@ Writing code for new features and fixing bugs takes up a lot of my free time. If
 
 <div align="center">
   <br>
-  <a href="https://abhirajroshan79.github.io/Directline/">👉 Download DirectLine and send a tip here 👈</a>
+  <a href="https://abhirajroshan79.github.io/Directline/">👉 Download and Send a tip here 👈</a>
   <br><br>
 </div>
 
