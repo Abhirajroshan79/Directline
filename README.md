@@ -23,7 +23,7 @@ Writing code for new features and fixing bugs takes up a lot of my free time. If
 
 ### Developer
 
-Abhishek Kumar Paswan
+**Abhishek Kumar Paswan**
 B.tech, Computer Science and Engineering 
 Government Engineering College, Ambikapur
 
