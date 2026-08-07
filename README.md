@@ -24,8 +24,8 @@ Writing code for new features and fixing bugs takes up a lot of my free time. If
 ### Developer
 
 **Abhishek Kumar Paswan**
-  <p>B.tech, Computer Science and Engineering </p>
- Government Engineering College, Ambikapur
+  <p>B.tech, Computer Science and Engineering 
+ Government Engineering College, Ambikapur</p>
 
 I built this project to solve real communication problems, mostly coding late at night while preparing for my university exams. 
 
