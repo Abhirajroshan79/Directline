@@ -23,11 +23,10 @@ Writing code for new features and fixing bugs takes up a lot of my free time. If
 
 ### Developer
 
-**Abhishek Kumar Paswan**
-  <p>B.tech, Computer Science and Engineering 
+<p>**Abhishek Kumar Paswan**
+B.tech, Computer Science and Engineering 
  Government Engineering College, Ambikapur</p>
-
-I built this project to solve real communication problems, mostly coding late at night while preparing for my university exams. 
+I built this project to solve real communication problems, mostly coding late at night. So your little donation inspiration for next update.
 
 If you want to reach out, report a bug, or just say hi, you can find me here:
 * **GitHub:** [abhirajroshan79](https://github.com/abhirajroshan79)
